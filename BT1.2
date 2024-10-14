@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <math.h>
+
+//Hàm tìm số ngto bé hơn N
+void sieveOfEratosthenes(int N, bool isPrime[]) {
+    for (int i = 0; i < N; i++) {
+        isPrime[i] = true; // Khởi tạo tất cả đều là số nguyên tố
+    }
+    isPrime[0] = isPrime[1] = false; // 0 và 1 không phải là số nguyên tố
+
+    for (int i = 2; i <= sqrt(N); i++) {
+        if (isPrime[i]) {
+            for (int j = i * i; j < N; j += i) {
+                isPrime[j] = false; // Đánh dấu các bội số của i là không nguyên tố
+            }
+        }
+    }
+}
+
+// Hàm in ra tất cả các cặp số nguyên tố có tổng cũng là một số nguyên tố nhỏ hơn N
+void findPrimePairs(int N, bool isPrime[]) {
+    printf("Các cặp số nguyên tố có tổng cũng là số nguyên tố nhỏ hơn %d:\n", N);
+    for (int i = 2; i < N; i++) {
+        if (isPrime[i]) {
+            for (int j = i; j < N; j++) {
+                if (isPrime[j] && i + j < N && isPrime[i + j]) {
+                    printf("(%d, %d) -> Tổng: %d\n", i, j, i + j);
+                }
+            }
+        }
+    }
+}
+
+// Hàm kiểm tra xem M có phải là số nguyên tố không
+bool isPrimeNumber(int M, bool isPrime[], int N) {
+    if (M < N && isPrime[M]) {
+        return true;
+    }
+    return false;
+}
+
+int main() {
+    int N, M;
+    printf("Nhập số N: ");
+    scanf("%d", &N);
+
+    // Mảng đánh dấu các số nguyên tố
+    bool isPrime[N];
+
+    // Tìm tất cả các số nguyên tố nhỏ hơn N
+    sieveOfEratosthenes(N, isPrime);
+
+    // In ra các số nguyên tố nhỏ hơn N
+    printf("Các số nguyên tố nhỏ hơn %d:\n", N);
+    for (int i = 2; i < N; i++) {
+        if (isPrime[i]) {
+            printf("%d ", i);
+        }
+    }
+    printf("\n");
+
+    // Tìm các cặp số nguyên tố có tổng cũng là số nguyên tố
+    findPrimePairs(N, isPrime);
+
+    // Kiểm tra một số nguyên tố M có tồn tại không
+    printf("Nhập số nguyên tố cần kiểm tra: ");
+    scanf("%d", &M);
+    if (isPrimeNumber(M, isPrime, N)) {
+        printf("%d là một số nguyên tố.\n", M);
+    } else {
+        printf("%d không phải là số nguyên tố.\n", M);
+    }
+
+    return 0;
+}
