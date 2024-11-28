@@ -6,11 +6,11 @@ using namespace std;
 
 // Cấu trúc Node đại diện cho một giỏ hàng
 struct Node {
-    string product;  // Tên sản phẩm
+    string product;  // Tên sản phẩm[]\=
     int quantity;    // Số lượng sản phẩm
     double price;    // Giá mỗi sản phẩm
     double total;    // Tổng giá trị của giỏ hàng (quantity * price)
-    
+
     // Hàm khởi tạo node
     Node(string p, int q, double pr) {
         product = p;
@@ -60,10 +60,10 @@ int main() {
     queue<Node> q;  // Khai báo hàng đợi
 
     // Thêm các giỏ hàng vào hàng đợi
-    q.push(Node("A", 5, 10.0));  // Giỏ hàng 1, sản phẩm A, số lượng 5, giá 10.0
-    q.push(Node("B", 3, 20.0));  // Giỏ hàng 2, sản phẩm B, số lượng 3, giá 20.0
-    q.push(Node("A", 2, 10.0));  // Giỏ hàng 3, sản phẩm A, số lượng 2, giá 10.0
-    q.push(Node("C", 1, 50.0));  // Giỏ hàng 4, sản phẩm C, số lượng 1, giá 50.0
+    q.push(Node("A", 5, 10.0));  
+    q.push(Node("B", 3, 20.0));  
+    q.push(Node("A", 2, 10.0));  
+    q.push(Node("C", 1, 50.0)); 
 
     // Xử lý thanh toán cho các khách hàng
     processPayment(q);
