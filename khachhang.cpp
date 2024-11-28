@@ -6,7 +6,7 @@ using namespace std;
 
 // Cấu trúc Node đại diện cho một giỏ hàng
 struct Node {
-    string product;  // Tên sản phẩm[]\=
+    string product;  // Tên sản phẩm
     int quantity;    // Số lượng sản phẩm
     double price;    // Giá mỗi sản phẩm
     double total;    // Tổng giá trị của giỏ hàng (quantity * price)
